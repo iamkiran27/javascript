@@ -1,0 +1,57 @@
+><html>
+    <body>
+
+        <center>
+            <button style="padding: 15px;border-radius: 10px;width: 100px;" onclick="displayData()">
+              <span style="font-size:18px">
+                GetData
+              </span>
+            </button>
+            <h2>
+    
+            </h2>
+        </center>
+       
+        <script>
+
+function getData(uId) {
+
+    let promise = new Promise((resolve, reject) => {
+        
+       let selector =  document.querySelector('h2');
+       selector.innerHTML = "Fetching......"
+    
+        setTimeout(() => {
+    console.log("Fetched the data!");
+    resolve("skc@gmail.com");
+    }, 4000);
+    });
+        return promise;
+    }
+    
+    function displayData()
+    {
+
+    
+    console.log("start");
+
+    getData("skc").then(x => {
+        let  selector =  document.querySelector('h2');
+       selector.innerHTML = "Email id of the user id is: " + x;
+        console.log("Email id of the user id is: " + x);
+    console.log("end");
+    })
+
+    .catch(err => console.log(err));
+}
+    
+        </script>
+    </body>
+</html>
+
+
+
+
+
+    
+    
