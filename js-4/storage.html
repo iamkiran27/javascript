@@ -1,0 +1,134 @@
+<html>
+  <style>
+    /* fieldset{
+      padding: 15px;
+      font-size: 30px;
+      margin-top: 20px;
+      border-color: blue;
+      width: 50%;
+    }
+    button{
+      padding: 15px;
+      margin : 15px;
+      border-radius:8%;
+      color: white;
+      background-color: black;
+      font-size: 18px;
+      display: inline;
+    }
+    .row {
+      display: inline;
+    }
+    .clear {
+      background-color: tomato;
+      width: 100px;
+      
+    }
+    p{
+      display: inline;
+      
+    } */
+  </style>
+  <head>
+    <link rel="stylesheet" href="./storage.css">
+  </head>
+  <body onload="setInitialData()">
+    <div class="container">
+      <fieldset>
+        <legend>
+          Local Storage
+        </legend>
+        
+        <button onclick="incrementLocal()">
+          Local Counter 
+        </button>
+        <p id="local">
+: 
+        </p>
+        <button class="clear" onclick="clearLocalStorage()">
+          Clear 
+        </button>
+      </fieldset>
+      <fieldset>
+        <legend>
+          Session Storage 
+        </legend>
+        <button onclick="incrementSession()">
+          Session Counter 
+        </button>
+        <p id="session">
+          : 
+        </p>
+        <button class="clear" onclick="clearSessionStorage()">
+          Clear 
+        </button>
+  
+      </fieldset>
+    </div>
+    
+  <script src="./storage.js">
+
+// let localP = document.getElementById("local");
+// let localS = document.getElementById("session");
+
+  
+// function setInitialData()
+// {
+  
+//   if(!localStorage.getItem("localCounter"))
+//   {
+//     console.log("Yooo")
+//     localP.innerHTML = ": " + 0;
+//     localS.innerHTML = ": " + 0;
+//   }
+//   else{
+//     localP.innerHTML = ": " + localStorage.getItem("localCounter");
+//     localS.innerHTML = ": " + 0;
+//   }
+//   sessionStorage.clear();
+
+// }
+
+// var clearLocalStorage = () => {
+//   localStorage.clear();
+//   localP.innerHTML = ": " + 0;
+// }
+
+// var clearSessionStorage = () => {
+//   sessionStorage.clear();
+//   localS.innerHTML = ": "+ 0;
+// }
+//       function incrementLocal()
+//       {
+
+//         if(localStorage.getItem("localCounter"))
+//         {
+
+//           localP.innerHTML = ": " + (parseInt(localStorage.getItem("localCounter")) + 1)
+//           localStorage.setItem("localCounter",parseInt(localStorage.getItem("localCounter")) + 1);
+//         }
+// else{
+//   localP.innerHTML = ": " + 1;
+//   localStorage.setItem("localCounter", 1);
+// }
+//       }
+
+//       function incrementSession()
+//       {
+
+// if(sessionStorage.getItem("sessionCounter"))
+//         {
+
+//           localS.innerHTML = ": " + (parseInt(sessionStorage.getItem("sessionCounter")) + 1)
+//           sessionStorage.setItem("sessionCounter",parseInt(sessionStorage.getItem("sessionCounter")) + 1);
+//         }
+// else{
+//   localS.innerHTML = ": " + 1;
+//   sessionStorage.setItem("sessionCounter", 1);
+// }
+      
+//       }
+
+  </script>
+  </body>
+</html>
