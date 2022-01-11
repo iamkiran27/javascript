@@ -1,0 +1,22 @@
+
+
+
+input:focus{
+    outline: none;
+}
+
+body{
+    height: 100%;
+    margin: 0px;
+}
+
+
+
+.menu-div {
+    height: 500px;
+}
+#menu-items {
+    height: 740px;
+  
+    overflow-y: auto;
+}

@@ -1,0 +1,48 @@
+   [
+        {
+            "name" : "Veg Biryani",
+            "price" : 250.00,
+            "type" : "main course"
+        },
+        {
+            "name" : "Chicken Biryani",
+            "price" : 250.00,
+            "type" : "main course"
+        },
+        {
+            "name" : "French Fries",
+            "price" : 250.00,
+            "type" : "starters"
+        },
+        {
+            "name" : "Cocktail",
+            "price" : 250.00,
+            "type" : "beverages"
+        },
+        {
+            "name" : "Coke",
+            "price" : 250.00,
+            "type" : "beverages"
+        },
+        {
+            "name" : "Manchuria",
+            "price" : 250.00,
+            "type" : "starters"
+        },
+        {
+            "name" : "Chocolate Ice cream",
+            "price" : 250.00,
+            "type" : "desserts"
+        }, {
+            "name" : "Rice and dal",
+            "price" : 250.00,
+            "type" : "main course"
+        },
+        {
+            "name" : "Gulab Jamun",
+            "price" : 250.00,
+            "type" : "desserts"
+        }
+   
+    ]
+
