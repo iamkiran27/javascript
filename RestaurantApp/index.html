@@ -24,11 +24,11 @@
 
                 </div>
                 <div class="row px-5 my-4">
-                    <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                    <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
                     transition: 0.3s; ">
                         <div class="container">
                             <div class="card-body">
-                                <input type="text" name="" id="search_table" placeholder="Search tables"
+                                <input type="text" name=""  onkeyup="searchTable()" id="search_table" placeholder="Search tables"
                                     style="width: 100%; border-color: transparent; font-size: 18px">
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="menu-div">
                     <div class="row px-5  mt-3 mb-5">
-                        <div class="card" style=" width: 50%;  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                        <div class="card" style=" width: 50%;  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
                     transition: 0.3s; ">
                             <div class="container">
                                 <div class="card-body">
@@ -95,6 +95,7 @@
             fetch(url1).then(response => response.json())
                 .then((data) => {
                     console.log(data)
+                    sessionStorage.setItem("food",JSON.stringify(data));
                     addFoodMenu(data);
                 }).catch(error => console.log(error));
 
@@ -102,6 +103,7 @@
             fetch(url2).then(response => response.json())
                 .then((data) => {
                     console.log(data)
+                    sessionStorage.setItem("table",data)
                     addTable(data);
                 }).catch(error => console.log(error));
 
@@ -123,7 +125,7 @@
 <div class="card" id=${table.id}  style="  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
 transition: 0.5s; ">
     <div class="card-body p-4">
-        <h2 class="card-title mb-4">Table ${idx + 1}</h2>
+        <h2 class="card-title mb-4">Table${idx + 1}</h2>
         <h5 class="card-text">
             Rs.${table.total_price} | Total items : ${table.total_items}
         </h5>
@@ -164,10 +166,11 @@ transition: 0.5s; ">
                         transition: 0.5s; ">
                                 <div class="card-body p-4">
                                     <h2 class="card-title mb-3">${food.name}</h2>
-
+                                    
                                     <h5 class="card-text mb-5">
                                         ${food.price}
                                     </h5>
+                                    <h3 style="display : none">${food.type}</h3>
                                 </div>
                             </div>
   `;
@@ -185,7 +188,34 @@ transition: 0.5s; ">
         }
 
 
+
+function searchTable() {
+
+var food = sessionStorage.getItem("food");
+console.log("food is : ,",food)
+    var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('search_table');
+  filter = input.value.toUpperCase();
+  console.log("Input is : ",filter)
+  ul = document.getElementById("tableList");
+  li = ul.getElementsByTagName('li');
+
+    for (i = 0; i < li.length; i++) {
+    console.log(li[i].getElementsByTagName("h2")[0].textContent);
+
+    txtValue = (li[i].getElementsByTagName("h2")[0].textContent);
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "block";
+    } else {
+      li[i].style.display = "none";
+    }
+}
+
+}
+
         function searchMenu() {
+
+
 
 
             var input, filter, ul, li, a, i, txtValue;
@@ -196,11 +226,13 @@ transition: 0.5s; ">
   li = ul.getElementsByTagName('li');
 
     // Loop through all list items, and hide those who don't match the search query
+
     for (i = 0; i < li.length; i++) {
     console.log(li[i].getElementsByTagName("h2")[0].textContent);
     // txtValue = a.textContent || a.innerText;
     txtValue = (li[i].getElementsByTagName("h2")[0].textContent);
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    cusine = (li[i].getElementsByTagName("h3")[0].textContent);
+    if (txtValue.toUpperCase().indexOf(filter) > -1 || cusine.toUpperCase().indexOf(filter) > -1) {
       li[i].style.display = "block";
     } else {
       li[i].style.display = "none";
