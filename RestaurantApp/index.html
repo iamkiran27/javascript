@@ -7,7 +7,8 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
 
@@ -21,33 +22,45 @@
 
 
 
- 
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: rgb(94, 72, 192);">
-          <h5 class="modal-title title" id="exampleModalLabel"> </h5>
-          <button type="button"  class=" btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        <div id="table-div">
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: rgb(94, 72, 192);">
+                    <h5 class="modal-title title" id="exampleModalLabel"> </h5>
+                    <button type="button" id="modal-button" class="btn-close btn-close-white "
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="table-div">
+                        <table class="table-content">
+                            <tr>
+                                <th>S.No</th>
+                                <th>Item Name</th>
+                                <th>Price</th>
+                                <th>No. of servings</th>
+                                <th> </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <span id="total">Total : </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="endSession" class="btn btn-secondary"
+                        > End Session</button>
+                     <button type="button" id="generateBill" class="btn btn-outline-primary">Generate Bill</button> 
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
 
 
     <div class="main-section">
-       
+
 
 
 
@@ -78,8 +91,6 @@
                 <div id="table-data">
 
                 </div>
-
-
             </div>
 
 
@@ -91,7 +102,7 @@
                     </center>
 
                 </div>
-                <div class="menu-div" >
+                <div class="menu-div">
                     <div class="row px-5  mt-3 mb-5">
                         <div class="card" style=" width: 50%;  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
                     transition: 0.3s; ">
@@ -120,285 +131,17 @@
 
     </div>
 
-    
 
-    <script>
 
-        const loadData = () => {
-            sessionStorage.clear()
 
-            const url1 = "data.json";
-            const url2 = "table.json";
-
-            fetch(url1).then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                    sessionStorage.setItem("food", JSON.stringify(data));
-                    addFoodMenu(data);
-                }).catch(error => console.log(error));
-
-
-            fetch(url2).then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                    sessionStorage.setItem("table", data)
-                    addTable(data);
-                }).catch(error => console.log(error));
-
-
-        }
-
-
-
-        const addTable = (data) => {
-            var table = document.getElementById("table-data");
-            const ul = document.createElement("ul");
-            ul.setAttribute("id", "tableList");
-
-            data.forEach((table, idx) => {
-                const li = document.createElement("li");
-
-                const content = `  <div class="row px-2 my-3  mx-1" ondrop="drop(event)"  ondragover="allowDrop(event)">
-
-
-<div class="card" name= ${table.name} onclick="openModal(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" id= ${table.id}  style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
-transition: 0.5s; ">
-    <div class="card-body p-4">
-        <h2 class="card-title mb-4">${table.name}</h2>
-        <h5 class="card-text">
-            Rs.${table.total_price} | Total items : ${table.total_items}
-        </h5>
-
-    </div>
-</div>
-
-
-
-</div> `;
-                li.setAttribute('style', 'display: block;');
-
-
-                li.innerHTML = content;
-                ul.appendChild(li);
-
-
-
-
-            });
-            console.log(ul);
-            table.appendChild(ul);
-
-        }
-
-
-
-        function openModal(e)
-        {
-
-
-          document.getElementById("table-div").innerHTML = "";
-
-
-
-            console.log(e.path[1].getElementsByTagName("h2")[0].innerHTML);
-        console.log(e.path[1].id)
-            var items = JSON.parse(sessionStorage.getItem(e.path[1].id));
-           document.getElementsByClassName("title")[0].innerHTML =  `${e.path[1].getElementsByTagName("h2")[0].innerHTML} | Order Details`
-           document.getElementsByClassName("title")[0].style = "color : white";  
-        var table = document.createElement('table');
-        console.log("Length ", items)
-
-for (var i = 0; i < items.length; i++){
-    var tr = document.createElement('tr');   
-
-    var td1 = document.createElement('td');
-    var td2 = document.createElement('td');
-    var td3 = document.createElement('td');
-    var td4 = document.createElement('td');
-    
-    var text1 = document.createTextNode('Text1');
-    var text2 = document.createTextNode('Text2');
-var input = document.createElement('input')
-input.setAttribute("type", "number")
-input.setAttribute("step", 1)
-input.setAttribute("min", 1)
-
-td1.appendChild(text1);
-    td2.appendChild(text2);
-    td3.appendChild(input)
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.append(td3)
-
-    table.appendChild(tr);
-}
-document.getElementById("table-div").appendChild(table);
-
-        }
-        const addFoodMenu = (data) => {
-
-            var menu = document.getElementById("menu-items");
-
-            const ul = document.createElement('ul');
-            ul.setAttribute("id", "foodList")
-
-            data.forEach((food, idx) => {
-                const li = document.createElement("li");
-                li.draggable = true;
-                const content = `
-  <div class="row px-4 mb-5 ">
-                            <div class="card" id="${idx + 1}" draggable="true" ondragstart="drag(event)" style="  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
-                        transition: 0.5s; ">
-                                <div class="card-body p-4">
-                                    <h2 class="card-title mb-3">${food.name}</h2>
-                                    
-                                    <h5 class="card-text mb-5">
-                                        Rs.${food.price}
-                                    </h5>
-                                    <h3 style="display : none">${food.type}</h3>
-                                </div>
-                            </div>
-  `;
-
-                li.setAttribute('style', 'display: block;');
-
-
-                li.innerHTML = content;
-                ul.appendChild(li);
-
-            });
-            // console.log(ul);
-            menu.appendChild(ul);
-
-        }
-
-
-
-        function searchTable() {
-
-            var food = sessionStorage.getItem("food");
-            console.log("food is : ,", food)
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('search_table');
-            filter = input.value.toUpperCase();
-            console.log("Input is : ", filter)
-            ul = document.getElementById("tableList");
-            li = ul.getElementsByTagName('li');
-
-            for (i = 0; i < li.length; i++) {
-                console.log(li[i].getElementsByTagName("h2")[0].textContent);
-
-                txtValue = (li[i].getElementsByTagName("h2")[0].textContent);
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "block";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-
-        }
-
-        function searchMenu() {
-
-
-
-
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('search_food');
-            filter = input.value.toUpperCase();
-            console.log("Input is : ", filter)
-            ul = document.getElementById("foodList");
-            li = ul.getElementsByTagName('li');
-
-            // Loop through all list items, and hide those who don't match the search query
-
-            for (i = 0; i < li.length; i++) {
-                console.log(li[i].getElementsByTagName("h2")[0].textContent);
-                // txtValue = a.textContent || a.innerText;
-                txtValue = (li[i].getElementsByTagName("h2")[0].textContent);
-                cusine = (li[i].getElementsByTagName("h3")[0].textContent);
-                if (txtValue.toUpperCase().indexOf(filter) > -1 || cusine.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "block";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-
-            // console.log(document.getElementById("menu-items").children[0]);
-        }
-
-
-        function allowDrop(ev) {
-            ev.preventDefault();
-
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-
-            var data = [];
-
-            ev.preventDefault();
-
-
-            var data = ev.dataTransfer.getData("text");
-            var name = document.getElementById(data).children[0].children[0].innerHTML
-
-            console.log(ev.path[1].id);
-
-            var price = parseInt(document.getElementById(data).children[0].children[1].textContent.split(".")[1].trim())
-            var prevPrice = parseInt(ev.target.children[1].textContent.trim().split(" | ")[0].split(".")[1]);
-            var prevTotal = parseInt(ev.target.children[1].textContent.trim().split(" | ")[1].split(":")[1]);
-            if (sessionStorage.getItem(ev.path[1].id)) {
-                var found = false
-                console.log("Already present ", sessionStorage.getItem(ev.path[1].id));
-                data = JSON.parse(sessionStorage.getItem(ev.path[1].id))
-                console.log(data)
-
-                data.forEach(element => {
-                    if (element.item == name) {
-                        found = true;
-                        element.count += 1;
-                        return;
-
-                    }
-
-
-                });
-
-                if (!found) {
-                    data.push({
-                        item: name,
-                        price: price,
-                        count: 1
-                    });
-                }
-                console.log("Updated : ", data)
-            }
-            else {
-                data = [];
-                data.push({
-                    item: name,
-                    price: price,
-                    count: 1
-                });
-
-                console.log(JSON.stringify(data))
-
-
-            }
-
-            ev.target.children[1].textContent = `Rs.${prevPrice + price} | Total items : ${data.length}`;
-            sessionStorage.setItem(ev.path[1].id, JSON.stringify(data))
-        }
-    </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+<script src="./app.js"></script>
+<script src="./dragNdrop.js"></script>
+<script src="./filter.js"></script>
+<script src="./generateBill.js"></script>
+<script src="./modalOperations.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 [
     {
-        "name" : "Table 1",
+        "name" : "Table1",
         "total_price" : 0,
         "total_items" : 0,
         "id" : "t1"
@@ -9,19 +9,19 @@
     },
     {
         "id" : "t2",
-        "name" : "Table 2",
+        "name" : "Table2",
         "total_price" : 0,
         "total_items" : 0
     },
     {
         "id" : "t3",
-        "name" : "Table 3",
+        "name" : "Table3",
         "total_price" : 0,
         "total_items" : 0
     },
     {
         "id" : "t4",
-        "name" : "Table 4",
+        "name" : "Table4",
         "total_price" : 0,
         "total_items" : 0
 

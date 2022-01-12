@@ -5,19 +5,51 @@ input:focus{
     outline: none;
 }
 
-body{
+html, body{
     height: 100%;
-    margin: 0px;
 }
 
 
+.table-content th ,td{
+    padding: 10px;
+    margin: 30px;
+    text-align: center;
+}
 
+
+.table-content{
+    width: 100%;
+}
+
+
+#total {
+
+
+    display: block;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    font-size: 30px;
+
+}
+
+
+.no-of-servings{
+
+    border: 0px;
+    border-bottom: 2px solid blue;
+    outline: 0px;
+    width: 80px;
+    text-align: center;
+
+}
 .menu-div {
     height: 500px;
 }
+
+
 #menu-items {
     height: 740px;
-  
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
